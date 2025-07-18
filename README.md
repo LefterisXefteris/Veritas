@@ -7,7 +7,7 @@ Pattern-based detection - Uses sophisticated patterns to identify potential secu
 Native LLM integration - Works seamlessly within the LLM workflow, not as an external filter
 
 
-Key Features
+Key Features:
 
 Proactive Security: Analyzes commands before execution
 Real-time Processing: Zero-latency threat detection
@@ -17,7 +17,7 @@ Risk Classification: Intelligent threat categorization
 Pattern Recognition: Advanced threat pattern detection
 
 Installation
-Prerequisites
+Prerequisites:
 
 Python 3.8+
 uv package manager - Required for dependency management
@@ -42,7 +42,7 @@ Configurations:
   }
 }
 
-Debuging 
+Debuging: 
 tail -n 20 -F ~/Library/Logs/Claude/mcp*.log
 
 
