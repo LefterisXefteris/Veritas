@@ -5,14 +5,19 @@ from fastmcp import FastMCP
 
 mcp = FastMCP("Veritas")
 
-# ADD THIS LINE - Create the SecurityLogic instance
+
 security_logic = SecurityLogic(security_service=None)
 
-@mcp.tool
+@mcp.tool(
+    name="let_safe_commands",
+    description="if command is safe then run it, else block it"
+)
 def let_safe_commands(content: str) -> bool:
     """Check if the given content is safe to execute"""
     try:
-        return security_logic.is_content_safe(content)
+        return {
+            "command is safe to run: "security_logic.is_content_safe(content)
+            }
     except Exception as e:
         print(f"Error: {e}")
         return False

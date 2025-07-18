@@ -4,6 +4,46 @@ DETECTION_PATTERNS = {
     # Original command patterns
     CommandType.SHELL: [
         {
+            "pattern": r"chmod\s+777",
+            "severity": RiskLevel.HIGH,
+            "description": "Dangerous permissions"
+        },
+        {
+            "pattern": r"chmod\s+666",
+            "severity": RiskLevel.MEDIUM,
+            "description": "World-writable permissions"
+        },
+        {
+            "pattern": r"chmod\s+-R\s+7[0-7][0-7]",
+            "severity": RiskLevel.CRITICAL,
+            "description": "Recursive dangerous permissions"
+        },
+        {
+            "pattern": r"chmod\s+[ugoa]*\+s",
+            "severity": RiskLevel.HIGH,
+            "description": "Setuid/setgid bit manipulation"
+        },
+        {
+            "pattern": r"chmod\s+[4-7][0-7][0-7][0-7]",
+            "severity": RiskLevel.HIGH,
+            "description": "Special permission bits (setuid/setgid/sticky)"
+        },
+        {
+            "pattern": r"chmod\s+\+x\s+.*\.(sh|py|pl|rb|exe)",
+            "severity": RiskLevel.MEDIUM,
+            "description": "Making script executable"
+        },
+        {
+            "pattern": r"chmod\s+-R\s+\+x",
+            "severity": RiskLevel.HIGH,
+            "description": "Recursive executable permissions"
+        },
+        {
+            "pattern": r"chmod\s+000",
+            "severity": RiskLevel.MEDIUM,
+            "description": "Removing all permissions"
+        },
+        {
             "pattern": r"rm\s+-rf\s+[/\\]",
             "severity": RiskLevel.CRITICAL,
             "description": "Recursive file deletion"

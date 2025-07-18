@@ -54,6 +54,13 @@ class SecurityLogic:
             if threat.severity in [RiskLevel.CRITICAL, RiskLevel.HIGH]:
                 return False
         return True
+
+    
+    
+    
+
+
+    
     
 
 """    def role_priv(self, file_path, user_role, user_id):
