@@ -1,0 +1,133 @@
+{
+  "version": "1.0",
+  "description": "Enterprise whitelist patterns for legitimate business operations",
+  "whitelist_patterns": [
+    {
+      "pattern": "sudo systemctl (start|stop|restart|reload) nginx",
+      "reason": "DevOps web server management",
+      "command_type": "shell",
+      "approved_by": "DevOps Team",
+      "risk_override": "approved_infrastructure"
+    },
+    {
+      "pattern": "sudo systemctl (start|stop|restart) docker",
+      "reason": "Container management operations",
+      "command_type": "shell", 
+      "approved_by": "Platform Team",
+      "risk_override": "approved_infrastructure"
+    },
+    {
+      "pattern": "chmod 755 /opt/company/scripts/",
+      "reason": "Company script deployment permissions",
+      "command_type": "shell",
+      "approved_by": "Security Team",
+      "risk_override": "approved_permissions"
+    },
+    {
+      "pattern": "rm -rf /tmp/build_artifacts",
+      "reason": "CI/CD cleanup operations",
+      "command_type": "shell",
+      "approved_by": "DevOps Team", 
+      "risk_override": "approved_cleanup"
+    },
+    {
+      "pattern": "curl -X POST https://api.company.com/",
+      "reason": "Approved internal API calls",
+      "command_type": "network",
+      "approved_by": "API Team",
+      "risk_override": "approved_api_access"
+    },
+    {
+      "pattern": "ssh deploy@production.company.com",
+      "reason": "Production deployment access",
+      "command_type": "network",
+      "approved_by": "DevOps Lead",
+      "risk_override": "approved_deployment"
+    },
+    {
+      "pattern": "sudo /opt/company/backup/daily_backup.sh",
+      "reason": "Scheduled backup operations",
+      "command_type": "shell",
+      "approved_by": "DBA Team",
+      "risk_override": "approved_backup"
+    },
+    {
+      "pattern": "chmod +x /opt/company/bin/",
+      "reason": "Company executable permissions",
+      "command_type": "shell",
+      "approved_by": "Platform Team",
+      "risk_override": "approved_executables"
+    },
+    {
+      "pattern": "wget https://releases.company.com/",
+      "reason": "Internal software downloads",
+      "command_type": "file_operation",
+      "approved_by": "Release Team",
+      "risk_override": "approved_downloads"
+    },
+    {
+      "pattern": "sudo mkdir -p /opt/company/",
+      "reason": "Company directory structure creation",
+      "command_type": "shell",
+      "approved_by": "Infrastructure Team",
+      "risk_override": "approved_directory_creation"
+    },
+    {
+      "pattern": "kill -9 .*company_process.*",
+      "reason": "Emergency company process termination",
+      "command_type": "shell",
+      "approved_by": "Operations Team",
+      "risk_override": "approved_process_management"
+    },
+    {
+      "pattern": "scp .*@backup.company.com:/backups/",
+      "reason": "Approved backup file transfers",
+      "command_type": "file_operation",
+      "approved_by": "Backup Team",
+      "risk_override": "approved_backup_transfer"
+    }
+  ],
+  "user_specific_whitelist": [
+    {
+      "user_pattern": "devops-.*",
+      "allowed_patterns": [
+        "sudo systemctl .*",
+        "docker .*",
+        "kubectl .*"
+      ],
+      "reason": "DevOps team broad permissions"
+    },
+    {
+      "user_pattern": "dba-.*", 
+      "allowed_patterns": [
+        "sudo /opt/mysql/bin/.*",
+        "mysqldump .*",
+        "pg_dump .*"
+      ],
+      "reason": "Database administrator permissions"
+    },
+    {
+      "user_pattern": "security-.*",
+      "allowed_patterns": [
+        "nmap .*",
+        "nc -.*",
+        "ss -.*"
+      ],
+      "reason": "Security team diagnostic tools"
+    }
+  ],
+  "time_based_whitelist": [
+    {
+      "pattern": "sudo reboot",
+      "allowed_hours": ["02:00-04:00"],
+      "reason": "Maintenance window reboots",
+      "approved_by": "Operations Team"
+    },
+    {
+      "pattern": "sudo /opt/company/maintenance/.*",
+      "allowed_days": ["Saturday", "Sunday"],
+      "reason": "Weekend maintenance scripts",
+      "approved_by": "Maintenance Team"
+    }
+  ]
+}
